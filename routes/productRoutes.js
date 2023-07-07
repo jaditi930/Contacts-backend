@@ -1,24 +1,22 @@
 const express=require("express")
-const router=express.Router()
+const router=express.Router();
+const {
+    getAllProducts,
+    getAProduct,
+    createProduct,
+    updateProduct,
+    deleteProduct
+}   =   require("../controllers/productController")
 
-router.route("/").get((req,res)=>{
-    res.status(200).json({message:"Get all products"})
-});
+router.route("/").get(getAllProducts);
 
-router.route("/").post((req,res)=>{
-     res.status(200).json({message:"Product created successfully"})
+router.route("/").post(createProduct);
 
-});
+router.route("/:id").get(getAProduct);
 
-router.route("/:id").put((req,res)=>{
-    id=req.params.id
-    res.status(200).json({message:`Product ${id} updated successfully`})
-});
+router.route("/:id").put(updateProduct);
 
-router.route("/:id").delete((req,res)=>{
-    id=req.params.id
-    res.status(200).json({message:`Product ${id} deleted successfully`})
-});
+router.route("/:id").delete(deleteProduct);
 
 
 module.exports=router;
