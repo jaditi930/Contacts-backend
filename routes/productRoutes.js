@@ -8,15 +8,15 @@ const {
     deleteProduct
 }   =   require("../controllers/productController")
 
-router.route("/").get(getAllProducts);
+router.route("/").get(getAllProducts).post(createProduct);
 
-router.route("/").post(createProduct);
+// router.route("/");
 
-router.route("/:id").get(getAProduct);
+router.route("/:id").get(getAProduct).put(updateProduct).delete(deleteProduct);
 
-router.route("/:id").put(updateProduct);
+// router.route("/:id");
 
-router.route("/:id").delete(deleteProduct);
+// router.route("/:id");
 
 
 module.exports=router;
