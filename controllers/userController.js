@@ -2,7 +2,7 @@ const asyncHandler=require("express-async-handler")
 const User=require("../models/userModel")
 const Contact=require("../models/contactModel")
 const bcrypt=require("bcrypt")
-const jwt=require("json-web-token")
+const jwt=require("jsonwebtoken")
 
 // @desc Sign Up User
 // @access public
@@ -50,20 +50,23 @@ const loginUser= asyncHandler(async (req,res)=>{
         throw new Error("Username or password is wrong")
     }
     const accessToken=jwt.sign({
+        user:{
             username:user.username
-    },process.env.SECRET_KEY,{
-        expiresIn:"1m"
+    }},process.env.SECRET_KEY,{
+        expiresIn:"15m"
     })
-    console.log(accessToken)
-    res.status(200).json(user)
-    // res.cookie("accessToken",accessToken)
+    res.status(200).json({
+        "accessToken":accessToken
+    })
 })
 
 // @desc Display all contacts of current user
 // @access private
-// @route GET /api/users/:username
+// @route GET /api/users/current
 const getUser= asyncHandler(async(req,res)=>{
-    const contacts=await Contact.findMany({username:req.params.username})
+console.log("user")
+    console.log(req.user)
+    const contacts=await Contact.findMany({username:req.user.username})
     if(!contacts)
     {
         res.json({"message":"No contacts found"})
