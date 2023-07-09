@@ -13,7 +13,9 @@ connectDb()
 app.use(express.json())
 
 // for routes
-app.use("/api/products",require("./routes/productRoutes"))
+app.use("/api/contacts",require("./routes/contactRoutes"))
+app.use("/api/users",require("./routes/userRoutes"))
+
 
 // for error handling
 app.use(errorHandler)
