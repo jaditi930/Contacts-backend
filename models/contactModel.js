@@ -2,10 +2,10 @@ const mongoose=require("mongoose")
 // const User=require("../models/userModel")
 const contactSchema = mongoose.Schema(
     { 
-      // username:{
-      //   type:{type:String},
-      //   ref:'User'
-      // },
+      username:{
+        type:String,
+        ref:'User'
+      },
       name: {
         type: String,
         unique: true,
