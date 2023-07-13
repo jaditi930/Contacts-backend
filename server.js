@@ -16,6 +16,8 @@ const corsOptions ={
     credentials:true,            //access-control-allow-credentials:true
     // methods:'GET, POST, PUT, DELETE',
     // headers:'Content-Type Authentication'
+    // 'access-control-expose-headers': 'Set-Cookie',
+
 }
 // for getting user data from request object before the call of the router
 app.use(express.json())

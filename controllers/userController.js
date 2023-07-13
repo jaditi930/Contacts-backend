@@ -55,8 +55,8 @@ const loginUser= asyncHandler(async (req,res)=>{
     }},process.env.SECRET_KEY,{
         expiresIn:"1h"
     })
-    res.setHeader('Set-Cookie', `token=${accessToken}`);
-    res.status(200).json({"user":user});
+    // res.setHeader('Set-Cookie', `token=${accessToken}`);
+    res.status(200).json({"token":accessToken});
 })
 
 // @desc Display all contacts of current user
@@ -66,10 +66,10 @@ const getUser= asyncHandler(async(req,res)=>{
 // console.log("user")
     // console.log(req.user)
     const contacts=await Contact.find({username:req.user.username})
-    // console.log(contacts)
+    console.log(contacts)
     if(contacts.length==0)
     {
-        res.json({"message":"No contacts found"})
+        res.json({})
     }
     res.status(200).json(contacts)
 })
