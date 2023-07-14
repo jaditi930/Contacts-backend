@@ -12,7 +12,7 @@ router.route("/").get(getAllContacts).post(createContact);
 
 // router.route("/");
 
-router.route("/:name").get(getAContact).put(updateContact).delete(deleteContact);
+router.route("/:id").get(getAContact).put(updateContact).delete(deleteContact);
 
 // router.route("/:id");
 

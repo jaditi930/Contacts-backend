@@ -7,15 +7,19 @@ const Contact=require("../models/contactModel")
 
 const getAllContacts=asyncHandler(async (req,res)=>{
     const contacts=await Contact.find({username:req.user.username})
+    for(let i=0;i<contacts.length;i++){
+        if(contacts[i]["emailAddress"]==null)
+        contacts[i]["emailAddress"]=""
+    }
     res.status(200).json(contacts)
 })
 
-// @desc Get contact with name
+// @desc Get contact with id
 // @access private
-// @route GET /api/contacts/:name
+// @route GET /api/contacts/:id
 const getAContact= asyncHandler(async (req,res)=>{
     console.log(req.params.name)
-    const contact=await Contact.findOne({username:req.user.username,name:req.params.name})
+    const contact=await Contact.findOne({username:req.user.username,id:req.params.id})
     if(!contact){
         res.status(404);
         throw new Error("Contact not found")
@@ -34,29 +38,33 @@ const createContact=asyncHandler(async(req,res)=>{
         res.status(400)
         throw new Error("Name and Phone Number are mandatory")
     }
+    console.log(emailAddress)
     if(emailAddress)
         {
+            console.log("c")
         const newContact=await Contact.create({username:req.user.username,name,phoneNumber,emailAddress})
+        console.log(newContact)
         res.status(200).json(newContact)
     }
     else
-    {
+    {   
         const newContact=await Contact.create({username:req.user.username,name,phoneNumber})
+        newContact["emailAddress"]="";
         res.status(200).json(newContact)
     }
 })
 
 
-// @desc Update contact with name
+// @desc Update contact with id
 // @access public
-// @route PUT /api/contacts/:name
+// @route PUT /api/contacts/:id
 const updateContact= asyncHandler(async(req,res)=>{
-        const contact=await Contact.findOne({username:req.user.username,name:req.params.name})
+        const contact=await Contact.findOne({username:req.user.username,_id:req.params.id})
     if(!contact){
         res.status(404);
         throw new Error("Contact not found")
     }
-    const filter={username:req.user.username,name:req.params.name}
+    const filter={username:req.user.username,_id:req.params.id}
     const updatedContact=await Contact.findOneAndUpdate(filter,
     req.body,{
         new:true
@@ -64,16 +72,17 @@ const updateContact= asyncHandler(async(req,res)=>{
     res.status(200).json(updatedContact)
 })
 
-// @desc Delete contact with name
+// @desc Delete contact with id
 // @access private
-// @route DELETE /api/contacts/:name
+// @route DELETE /api/contacts/:id
 const deleteContact= asyncHandler(async(req,res)=>{
-    const contact=await Contact.findOne({username:req.user.username,name:req.params.name})
+    const contact=await Contact.findOne({username:req.user.username,_id:req.params.id})
     if(!contact){
         res.status(404);
         throw new Error("Contact not found")
     }
-    await Contact.deleteOne({username:req.user.username,name:req.params.name})
+    console.log(contact)
+    await Contact.deleteOne({username:req.user.username,_id:req.params.id})
     res.status(200).json({message:"Contact deleted successfully"})
 })
 module.exports={getAllContacts,getAContact,createContact,updateContact,deleteContact};
