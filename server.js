@@ -33,6 +33,6 @@ app.use("/api/users",require("./routes/userRoutes"))
 // for error handling
 app.use(errorHandler)
 
-// app.listen(port,()=>{
-//     console.log(`Server running on port ${port}`)
-// })
+app.listen(port,()=>{
+    console.log(`Server running on port ${port}`)
+})

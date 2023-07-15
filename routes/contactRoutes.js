@@ -1,5 +1,4 @@
 const express=require("express");
-const sls=require("serverless-http")
 const router=express.Router();
 const {
     getAllContacts,getAContact,createContact,updateContact,deleteContact
@@ -19,6 +18,4 @@ router.route("/:id").get(getAContact).put(updateContact).delete(deleteContact);
 
 // router.route("/:id");
 
-app.use("/.netlify/functions/api",router)
 module.exports=router;
-module.exports.handler=sls(http);
