@@ -5,6 +5,7 @@ const app=express()
 const cors=require("cors")
 const connectDb=require("./dbConnection")
 const bodyParser = require('body-parser');
+const { route } = require("./routes/userRoutes")
 app.use(express.urlencoded({ extended: true })); // support encoded bodies
 app.use(bodyParser.urlencoded({limit: '5000mb', extended: true, parameterLimit: 100000000000}));
 app.use(bodyParser.json());
@@ -32,6 +33,6 @@ app.use("/api/users",require("./routes/userRoutes"))
 // for error handling
 app.use(errorHandler)
 
-app.listen(port,()=>{
-    console.log(`Server running on port ${port}`)
-})
+// app.listen(port,()=>{
+//     console.log(`Server running on port ${port}`)
+// })
