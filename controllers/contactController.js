@@ -69,6 +69,8 @@ const updateContact= asyncHandler(async(req,res)=>{
     req.body,{
         new:true
     })
+    console.log(updateContact)
+    console.log("hello")
     res.status(200).json(updatedContact)
 })
 

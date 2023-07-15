@@ -5,19 +5,17 @@ const app=express()
 const cors=require("cors")
 const connectDb=require("./dbConnection")
 const bodyParser = require('body-parser');
-const { route } = require("./routes/userRoutes")
 app.use(express.urlencoded({ extended: true })); // support encoded bodies
 app.use(bodyParser.urlencoded({limit: '5000mb', extended: true, parameterLimit: 100000000000}));
 app.use(bodyParser.json());
 const port=process.env.PORT
+
 //connect to database
 connectDb()
+
 const corsOptions ={
     origin:'http://localhost:3000', 
-    credentials:true,            //access-control-allow-credentials:true
-    // methods:'GET, POST, PUT, DELETE',
-    // headers:'Content-Type Authentication'
-    // 'access-control-expose-headers': 'Set-Cookie',
+    credentials:true,            
 
 }
 // for getting user data from request object before the call of the router
