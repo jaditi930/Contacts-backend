@@ -4,17 +4,17 @@ const errorHandler=require("./middleware/errorHandler")
 const app=express()
 const cors=require("cors")
 const connectDb=require("./dbConnection")
-const bodyParser = require('body-parser');
-app.use(express.urlencoded({ extended: true })); // support encoded bodies
-app.use(bodyParser.urlencoded({limit: '5000mb', extended: true, parameterLimit: 100000000000}));
-app.use(bodyParser.json());
+// const bodyParser = require('body-parser');
+// app.use(express.urlencoded({ extended: true })); // support encoded bodies
+// app.use(bodyParser.urlencoded({limit: '5000mb', extended: true, parameterLimit: 100000000000}));
+// app.use(bodyParser.json());
 const port=process.env.PORT
 
 //connect to database
 connectDb()
 
 const corsOptions ={
-    origin:'http://localhost:3000', 
+    origin:'https://contactly.onrender.com', 
     credentials:true,            
 
 }
