@@ -4,6 +4,7 @@ const errorHandler=require("./middleware/errorHandler")
 const app=express()
 const cors=require("cors")
 const connectDb=require("./dbConnection")
+app.use(express.static(__dirname + '/public/'));
 // const bodyParser = require('body-parser');
 // app.use(express.urlencoded({ extended: true })); // support encoded bodies
 // app.use(bodyParser.urlencoded({limit: '5000mb', extended: true, parameterLimit: 100000000000}));
