@@ -15,7 +15,7 @@ const port=process.env.PORT
 connectDb()
 
 const corsOptions ={
-    origin:['https://contactly.onrender.com','http://localhost:3000'], 
+    origin:['https://contact-manager-app-xy4o.onrender.com/','http://localhost:3000'], 
     credentials:true,            
 
 }
